@@ -1,10 +1,10 @@
 # Meaning Finder
 
-Meaning Finder is a browser extension that helps you find the meaning of words instantly. Simply select a word on any webpage, and the definition will appear in a clean and simple popup.
+Meaning Finder is a browser extension that helps you find the meaning of words or paragraph instantly. Simply select a word or paragraph on any webpage, and the definition will appear in a clean and simple popup.
 
 ## Features
 
-*   **Quick Word Lookup:** Select any word on a webpage to get its definition.
+*   **Quick Word Lookup:** Select any word or paragraph on a webpage to get its definition.
 *   **Easy to Use:** Simple and intuitive interface.
 *   **Lightweight:** The extension is fast and doesn't slow down your browser.
 
@@ -26,8 +26,8 @@ Meaning Finder is a browser extension that helps you find the meaning of words i
 ## Usage
 
 1.  Navigate to any webpage with text.
-2.  Highlight the word you want to define.
-3.  The meaning of the word will be displayed in the extension's popup.
+2.  Highlight the word or paragraph you want to define.
+3.  The meaning of the word or paragraph will be displayed in the extension's popup.
 
 ## Technologies Used
 
