@@ -1,41 +1,23 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap" rel="stylesheet">
   <title>Meaning Finder Options</title>
-  <link rel="stylesheet" type="text/css" href="style.css">
-  <style>
-    body { width: 400px; text-align: center; font-family: 'Lexend', sans-serif; }
-    h1 { color: #333; }
-    #status { margin-top: 10px; font-weight: bold; }
-    input {
-      width: 90%;
-      padding: 8px;
-      margin-top: 10px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-    }
-    button {
-      margin-top: 15px;
-      padding: 10px 20px;
-      background-color: #007bff;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: background-color 0.2s;
-    }
-    button:hover { background-color: #0056b3; }
-  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
-<body>
-  <h1>Meaning Finder Options</h1>
-  <p>Please enter your Google Gemini API key.</p>
-  <input type="text" id="apiKey" placeholder="Enter your API key">
-  <button id="save">Save</button>
-  <div id="status"></div>
+<body class="options-page-body">
+  <canvas id="gradient-canvas"></canvas>
+  <div class="options-container glass-card">
+    <h1>Meaning Finder Options</h1>
+    <label for="apiKey">Please enter your Google Gemini API key.</label>
+    <input type="text" id="apiKey" name="apiKey" placeholder="Enter your API key here...">
+    <div class="button-wrap" id="save-button-wrapper">
+      <button id="save"><span>Save</span></button>
+      <div class="button-shadow"></div>
+    </div>
+    <div id="status"></div>
+  </div>
   <script src="options.js"></script>
+  <script src="options_background.js"></script>
 </body>
 </html>
