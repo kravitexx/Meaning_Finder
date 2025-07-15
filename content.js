@@ -6,11 +6,36 @@ if (!meaningButton) {
     meaningButton = document.createElement('div');
     meaningButton.id = 'meaning-button';
     meaningButton.textContent = 'Meaning';
+    // Inject Lexend font if not already present
+    if (!document.getElementById('lexend-font-link')) {
+        const lexendFontLink = document.createElement('link');
+        lexendFontLink.id = 'lexend-font-link';
+        lexendFontLink.rel = 'stylesheet';
+        lexendFontLink.href = 'https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap';
+        document.head.appendChild(lexendFontLink);
+    }
     Object.assign(meaningButton.style, {
-        position: 'absolute', backgroundColor: '#007bff', color: 'white', border: 'none',
-        borderRadius: '8px', padding: '8px 15px', cursor: 'pointer', zIndex: '10000',
-        boxShadow: '0 4px 8px rgba(0, 0, 0, 0.15)', fontSize: '14px', fontWeight: 'bold',
-        transition: 'background-color 0.2s, transform 0.2s', display: 'none'
+        position: 'absolute',
+        backgroundColor: '#007bff',
+        color: 'white',
+        border: 'none',
+        borderRadius: '8px',
+        padding: '8px 15px',
+        cursor: 'pointer',
+        zIndex: '10000',
+        boxShadow: '0 4px 8px rgba(0, 0, 0, 0.15)',
+        fontSize: '16px',
+        fontWeight: 'bold',
+        transition: 'background-color 0.2s, transform 0.2s',
+        display: 'none',
+        fontFamily: 'Lexend, sans-serif',
+        fontStyle: 'normal',
+        fontOpticalSizing: 'auto',
+        lineHeight: '1.4',
+        letterSpacing: '0.01em',
+        textRendering: 'optimizeLegibility',
+        WebkitFontSmoothing: 'antialiased',
+        MozOsxFontSmoothing: 'grayscale',
     });
     document.body.appendChild(meaningButton);
 
@@ -28,9 +53,28 @@ if (!meaningOverlay) {
     meaningOverlay = document.createElement('div');
     meaningOverlay.id = 'meaning-overlay';
     Object.assign(meaningOverlay.style, {
-        position: 'fixed', top: '50%', left: '50%', transform: 'translate(-50%, -50%)',
-        width: '400px', backgroundColor: 'white', border: '1px solid #ccc', borderRadius: '10px',
-        boxShadow: '0 5px 15px rgba(0,0,0,0.3)', zIndex: '10001', display: 'none', padding: '20px'
+        position: 'fixed',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+        width: '400px',
+        backgroundColor: 'white',
+        border: '1px solid #ccc',
+        borderRadius: '10px',
+        boxShadow: '0 5px 15px rgba(0,0,0,0.3)',
+        zIndex: '10001',
+        display: 'none',
+        padding: '20px',
+        fontFamily: 'Lexend, sans-serif',
+        fontStyle: 'normal',
+        fontOpticalSizing: 'auto',
+        fontSize: '16px',
+        lineHeight: '1.6',
+        color: '#222',
+        textRendering: 'optimizeLegibility',
+        WebkitFontSmoothing: 'antialiased',
+        MozOsxFontSmoothing: 'grayscale',
+        letterSpacing: '0.01em',
     });
 
     const closeButton = document.createElement('button');

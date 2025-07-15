@@ -3,7 +3,7 @@
   "manifest_version": 3,
   "name": "Meaning Finder",
   "version": "1.0",
-  "description": "Get the meaning of selected text.",
+  "description": "Get the meaning of selected text or paragraph.",
   "permissions": [
     "activeTab",
     "scripting",

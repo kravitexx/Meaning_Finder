@@ -1,8 +1,12 @@
 body {
   width: 350px;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Lexend', sans-serif !important;
   background: linear-gradient(to bottom, #f0f4f8, #d9e2ec);
   color: #333;
+}
+
+* {
+  font-family: 'Lexend', sans-serif !important;
 }
 
 #meaning-button {
