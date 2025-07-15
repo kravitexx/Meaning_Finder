@@ -72,8 +72,25 @@ function showMeaning(word, meaning, isParagraph, clickX, clickY) {
 
     closeButton.onclick = () => { meaningOverlay.style.display = 'none'; };
 
+    const buttonContainer = document.createElement('div');
+    buttonContainer.className = 'meaning-box-controls';
+
+    const toggleLabel = document.createElement('label');
+    const toggleInput = document.createElement('input');
+    toggleInput.type = 'checkbox';
+    toggleInput.className = 'bubble';
+    toggleInput.id = 'background-toggle';
+    toggleLabel.appendChild(toggleInput);
+
+    toggleInput.addEventListener('change', () => {
+        meaningOverlay.classList.toggle('white-background');
+    });
+
+    buttonContainer.appendChild(toggleLabel);
+    buttonContainer.appendChild(closeButtonWrapper);
+
     header.appendChild(title);
-    header.appendChild(closeButtonWrapper);
+    header.appendChild(buttonContainer);
 
     const meaningDiv = document.createElement('div');
     meaningDiv.id = 'meaning';
