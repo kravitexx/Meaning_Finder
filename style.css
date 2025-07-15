@@ -1,112 +1,29 @@
-html, body, * {
-  font-family: "Lexend", sans-serif !important;
-  font-optical-sizing: auto;
-  font-style: normal;
-}
-
 body {
   width: 350px;
-  font-family: "Lexend", sans-serif !important;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background: linear-gradient(to bottom, #f0f4f8, #d9e2ec);
   color: #333;
 }
 
 #meaning-button {
-  position: absolute;
-  z-index: 10000;
-  display: none;
+    position: absolute;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 15px;
+    cursor: pointer;
+    z-index: 10000;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    font-size: 14px;
+    font-weight: bold;
+    transition: background-color 0.2s ease-in-out, transform 0.2s ease-in-out;
 }
 
-#meaning-button .meaning-btn-ui {
-  position: relative !important;
-  border: 2px solid red !important; /* DEBUG: Remove after test */
-  background: transparent !important;
-  padding: 0 !important;
-  cursor: pointer !important;
-  outline-offset: 4px !important;
-  transition: filter 250ms !important;
-  user-select: none !important;
-  touch-action: manipulation !important;
-  box-shadow: none !important;
+#meaning-button:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
 }
-
-#meaning-button .front {
-  background: hsl(345deg 100% 47%) !important;
-  color: white !important;
-  border-radius: 12px !important;
-}
-
-
-#meaning-button .shadow {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  border-radius: 12px;
-  background: hsl(0deg 0% 0% / 0.25);
-  will-change: transform;
-  transform: translateY(2px);
-  transition: transform 600ms cubic-bezier(.3, .7, .4, 1);
-}
-
-#meaning-button .edge {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  border-radius: 12px;
-  background: linear-gradient(
-    to left,
-    hsl(340deg 100% 16%) 0%,
-    hsl(340deg 100% 32%) 8%,
-    hsl(340deg 100% 32%) 92%,
-    hsl(340deg 100% 16%) 100%
-  );
-}
-
-#meaning-button .front {
-  display: block;
-  position: relative;
-  padding: 10px 20px;
-  border-radius: 12px;
-  font-size: 1.50rem;
-  color: white;
-  background: hsl(345deg 100% 47%);
-  will-change: transform;
-  transform: translateY(-4px);
-  transition: transform 600ms cubic-bezier(.3, .7, .4, 1);
-}
-
-#meaning-button .meaning-btn-ui:hover {
-  filter: brightness(110%);
-}
-
-#meaning-button .meaning-btn-ui:hover .front {
-  transform: translateY(-6px);
-  transition: transform 250ms cubic-bezier(.3, .7, .4, 1.5);
-}
-
-#meaning-button .meaning-btn-ui:active .front {
-  transform: translateY(-2px);
-  transition: transform 34ms;
-}
-
-#meaning-button .meaning-btn-ui:hover .shadow {
-  transform: translateY(4px);
-  transition: transform 250ms cubic-bezier(.3, .7, .4, 1.5);
-}
-
-#meaning-button .meaning-btn-ui:active .shadow {
-  transform: translateY(1px);
-  transition: transform 34ms;
-}
-
-#meaning-button .meaning-btn-ui:focus:not(:focus-visible) {
-  outline: none;
-}
-
 
 #meaning-container {
   padding: 15px;
