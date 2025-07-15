@@ -34,35 +34,30 @@ if (!meaningOverlay) {
     meaningOverlay.className = 'glass-card';
     Object.assign(meaningOverlay.style, {
         position: 'fixed',
-        top: '50%',
-        left: '50%',
-        transform: 'translate(-50%, -50%)',
         width: '400px',
         zIndex: '10001',
         display: 'none',
         padding: '20px',
         fontFamily: 'Lexend, sans-serif',
-        fontStyle: 'normal',
-        fontOpticalSizing: 'auto',
-        fontSize: '16px',
-        lineHeight: '1.6',
-        color: '#222',
-        textRendering: 'optimizeLegibility',
-        WebkitFontSmoothing: 'antialiased',
-        MozOsxFontSmoothing: 'grayscale',
-        letterSpacing: '0.01em',
+        color: '#333',
     });
+    document.body.appendChild(meaningOverlay);
+}
 
-    meaningOverlay.innerHTML = '<h2 id="overlay-word"></h2><div id="overlay-meaning"></div>';
+let currentText = '';
+
+function showMeaning(word, meaning, isParagraph, clickX, clickY) {
+    meaningOverlay.innerHTML = ''; // Clear previous content
+
+    const header = document.createElement('div');
+    header.className = 'meaning-box-header';
+
+    const title = document.createElement('h1');
+    title.textContent = isParagraph ? 'Paragraph Summary' : word;
 
     const closeButtonWrapper = document.createElement('div');
     closeButtonWrapper.className = 'button-wrap';
-    Object.assign(closeButtonWrapper.style, {
-        position: 'absolute',
-        top: '10px',
-        right: '10px',
-        transform: 'scale(0.8)' // Scale down the button to fit the overlay
-    });
+    closeButtonWrapper.style.transform = 'scale(0.8)';
 
     const closeButton = document.createElement('button');
     const closeSpan = document.createElement('span');
@@ -75,21 +70,33 @@ if (!meaningOverlay) {
     closeButtonWrapper.appendChild(closeButton);
     closeButtonWrapper.appendChild(closeShadow);
 
-    closeButton.onclick = () => meaningOverlay.style.display = 'none';
+    closeButton.onclick = () => { meaningOverlay.style.display = 'none'; };
 
-    meaningOverlay.appendChild(closeButtonWrapper);
-    document.body.appendChild(meaningOverlay);
+    header.appendChild(title);
+    header.appendChild(closeButtonWrapper);
+
+    const meaningDiv = document.createElement('div');
+    meaningDiv.id = 'meaning';
+    meaningDiv.innerHTML = meaning;
+
+    meaningOverlay.appendChild(header);
+    meaningOverlay.appendChild(meaningDiv);
+
+    meaningOverlay.style.left = `${clickX + 5}px`;
+    meaningOverlay.style.top = `${clickY + 5}px`;
+    meaningOverlay.style.display = 'block';
 }
 
-let currentText = '';
+let lastClick = { x: 0, y: 0 };
 
-meaningButton.addEventListener('click', () => {
+meaningButton.addEventListener('click', (e) => {
+  lastClick = { x: e.clientX, y: e.clientY };
   if (currentText) {
+    const isParagraph = currentText.includes(' ') || currentText.length > 50;
+    showMeaning(currentText, 'Loading...', isParagraph, lastClick.x, lastClick.y);
     chrome.runtime.sendMessage({ text: currentText });
-    meaningOverlay.querySelector('#overlay-meaning').textContent = 'Loading...';
-    meaningOverlay.style.display = 'block';
+    meaningButtonWrapper.style.display = 'none';
   }
-  meaningButtonWrapper.style.display = 'none';
 });
 
 document.addEventListener('mouseup', (event) => {
@@ -113,7 +120,9 @@ document.addEventListener('scroll', () => {
 
 chrome.runtime.onMessage.addListener((request) => {
   if (request.type === 'meaningResult') {
-    meaningOverlay.querySelector('#overlay-word').textContent = request.word;
-    meaningOverlay.querySelector('#overlay-meaning').innerHTML = request.meaning;
+    const isParagraph = request.word.includes(' ') || request.word.length > 50;
+    // Call showMeaning to rebuild the overlay with the final content.
+    // lastClick is used to position it at the same spot where the user clicked.
+    showMeaning(request.word, request.meaning, isParagraph, lastClick.x, lastClick.y);
   }
 });

@@ -274,23 +274,34 @@ button:active::after {
 }
 
 /* Styles for popup and overlay */
-#meaning-container {
-  padding: 15px;
+#meaning-overlay {
+  max-width: 400px;
+  min-width: 300px;
+  padding: 20px;
+  box-sizing: border-box;
   text-align: left;
+  color: #333;
 }
 
-h1 {
-  font-size: 1.5em;
-  margin-top: 0;
-  color: #0056b3;
-  border-bottom: 2px solid #0056b3;
-  padding-bottom: 5px;
+.meaning-box-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.meaning-box-header h1 {
+  font-size: 20px;
+  font-weight: 600;
+  margin: 0;
+  flex-grow: 1;
+  padding-right: 15px; /* Space between title and button */
 }
 
 #meaning {
-    font-size: 1em;
-    line-height: 1.6;
-    margin-top: 10px;
+  font-size: 1em;
+  line-height: 1.6;
+  margin-top: 10px;
 }
 
 * {
