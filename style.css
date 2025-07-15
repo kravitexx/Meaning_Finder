@@ -334,7 +334,8 @@ h1 {
   border-radius: 5px;
   box-sizing: border-box;
   background-color: rgba(255, 255, 255, 0.2);
-  color: #333; /* Change input text color back to black */
+  color: #000000; /* Change input text color back to black */
+  box-shadow: 0 4px 4px -2.5px rgba(0, 0, 0, 0.2);
 }
 
 .options-container input[type="text"]::placeholder {
@@ -344,6 +345,10 @@ h1 {
 .options-container .button-wrap {
   margin-top: 25px;
   display: inline-block; /* Center the button */
+}
+
+#save-button-wrapper {
+  transform: scale(1.2);
 }
 
 #status {
