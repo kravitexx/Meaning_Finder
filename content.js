@@ -55,11 +55,9 @@ function showMeaning(word, meaning, isParagraph, clickX, clickY) {
     const title = document.createElement('h1');
     title.textContent = isParagraph ? 'Paragraph Summary' : word;
 
-    const closeButtonWrapper = document.createElement('div');
-    closeButtonWrapper.className = 'button-wrap';
-    closeButtonWrapper.style.transform = 'scale(0.8)';
-
     const closeButton = document.createElement('button');
+    closeButton.className = 'button-wrap'; // Moved from wrapper
+    closeButton.style.transform = 'scale(0.8)';
     const closeSpan = document.createElement('span');
     closeSpan.textContent = 'Close';
     closeButton.appendChild(closeSpan);
@@ -67,8 +65,7 @@ function showMeaning(word, meaning, isParagraph, clickX, clickY) {
     const closeShadow = document.createElement('div');
     closeShadow.className = 'button-shadow';
 
-    closeButtonWrapper.appendChild(closeButton);
-    closeButtonWrapper.appendChild(closeShadow);
+    closeButton.appendChild(closeShadow); // Shadow is now a child of the button
 
     closeButton.onclick = () => { meaningOverlay.style.display = 'none'; };
 
@@ -87,7 +84,7 @@ function showMeaning(word, meaning, isParagraph, clickX, clickY) {
     });
 
     buttonContainer.appendChild(toggleLabel);
-    buttonContainer.appendChild(closeButtonWrapper);
+    buttonContainer.appendChild(closeButton);
 
     header.appendChild(title);
     header.appendChild(buttonContainer);

@@ -17,58 +17,9 @@
   --anim--hover-ease: cubic-bezier(0.25, 1, 0.5, 1);
 }
 
-/* ========== BUTTON ========== */
-
-/* Button Wrap Container */
-.button-wrap {
-  position: relative;
-  z-index: 2;
-  border-radius: 999vw;
-  background: transparent;
-  pointer-events: none;
-  transition: all var(--anim--hover-time) var(--anim--hover-ease);
-}
-
-/* Button Shadow Container */
-.button-shadow {
-  --shadow-cuttoff-fix: 2em;
-  position: absolute;
-  width: calc(100% + var(--shadow-cuttoff-fix));
-  height: calc(100% + var(--shadow-cuttoff-fix));
-  top: calc(0% - var(--shadow-cuttoff-fix) / 2);
-  left: calc(0% - var(--shadow-cuttoff-fix) / 2);
-  filter: blur(clamp(2px, 0.125em, 12px));
-  -webkit-filter: blur(clamp(2px, 0.125em, 12px));
-  -moz-filter: blur(clamp(2px, 0.125em, 12px));
-  -ms-filter: blur(clamp(2px, 0.125em, 12px));
-  overflow: visible;
-  pointer-events: none;
-}
-
-/* Shadow */
-.button-shadow::after {
-  content: "";
-  position: absolute;
-  z-index: 0;
-  inset: 0;
-  border-radius: 999vw;
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.1));
-  width: calc(100% - var(--shadow-cuttoff-fix) - 0.25em);
-  height: calc(100% - var(--shadow-cuttoff-fix) - 0.25em);
-  top: calc(var(--shadow-cuttoff-fix) - 0.5em);
-  left: calc(var(--shadow-cuttoff-fix) - 0.875em);
-  padding: 0.125em;
-  box-sizing: border-box;
-  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-  mask-composite: exclude;
-  transition: all var(--anim--hover-time) var(--anim--hover-ease);
-  overflow: visible;
-  opacity: 1;
-}
-
-/* ========== BUTTON BASE STYLES ========== */
-
-button {
+/* ========== BUTTON SHARED STYLES ========== */
+#meaning-button-wrapper button, 
+#meaning-overlay .button-wrap {
   /* Basic Styling */
   --border-width: clamp(1px, 0.0625em, 4px);
   all: unset;
@@ -91,17 +42,14 @@ button {
     0 0 0 0 rgba(255, 255, 255, 1);
   backdrop-filter: blur(clamp(1px, 0.125em, 4px));
   -webkit-backdrop-filter: blur(clamp(1px, 0.125em, 4px));
-  -moz-backdrop-filter: blur(clamp(1px, 0.125em, 4px));
-  -ms-backdrop-filter: blur(clamp(1px, 0.125em, 4px));
   transition: all var(--anim--hover-time) var(--anim--hover-ease);
 }
 
-button:hover {
+#meaning-button-wrapper button:hover, 
+#meaning-overlay .button-wrap:hover {
   transform: scale(0.975);
   backdrop-filter: blur(0.01em);
   -webkit-backdrop-filter: blur(0.01em);
-  -moz-backdrop-filter: blur(0.01em);
-  -ms-backdrop-filter: blur(0.01em);
   box-shadow: inset 0 0.125em 0.125em rgba(0, 0, 0, 0.05),
     inset 0 -0.125em 0.125em rgba(255, 255, 255, 0.5),
     0 0.15em 0.05em -0.1em rgba(0, 0, 0, 0.25),
@@ -109,8 +57,8 @@ button:hover {
     0 0 0 0 rgba(255, 255, 255, 1);
 }
 
-/* Button Text */
-button span {
+#meaning-button-wrapper button span, 
+#meaning-overlay .button-wrap span {
   position: relative;
   display: block;
   user-select: none;
@@ -130,17 +78,18 @@ button span {
   padding-block: 0.875em;
 }
 
-button:hover span {
+#meaning-button-wrapper button:hover span, 
+#meaning-overlay .button-wrap:hover span {
   text-shadow: 0.025em 0.025em 0.025em rgba(0, 0, 0, 0.12);
 }
 
-/* Text */
-button span::after {
+#meaning-button-wrapper button span::after, 
+#meaning-overlay .button-wrap span::after {
   content: "";
   display: block;
   position: absolute;
   z-index: 1;
-  width: calc(100% - var(--border-width)); /* Prevent overlapping border */
+  width: calc(100% - var(--border-width));
   height: calc(100% - var(--border-width));
   top: calc(0% + var(--border-width) / 2);
   left: calc(0% + var(--border-width) / 2);
@@ -164,27 +113,19 @@ button span::after {
     --angle-2 calc(var(--anim--hover-time) * 1.25) var(--anim--hover-ease);
 }
 
-button:hover span::after {
+#meaning-button-wrapper button:hover span::after, 
+#meaning-overlay .button-wrap:hover span::after {
   background-position: 25% 50%;
 }
 
-button:active span::after {
+#meaning-button-wrapper button:active span::after, 
+#meaning-overlay .button-wrap:active span::after {
   background-position: 50% 15%;
   --angle-2: -15deg;
 }
 
-/* Touch Devices */
-@media (hover: none) and (pointer: coarse) {
-  button span::after,
-  button:active span::after {
-    --angle-2: -45deg;
-  }
-}
-
-/* ========== BUTTON OUTLINE ========== */
-
-/* Outline */
-button::after {
+#meaning-button-wrapper button::after, 
+#meaning-overlay .button-wrap::after {
   content: "";
   position: absolute;
   z-index: 1;
@@ -212,24 +153,62 @@ button::after {
   box-shadow: inset 0 0 0 calc(var(--border-width) / 2) rgba(255, 255, 255, 0.5);
 }
 
-button:hover::after {
+#meaning-button-wrapper button:hover::after, 
+#meaning-overlay .button-wrap:hover::after {
   --angle-1: -125deg;
 }
 
-button:active::after {
+#meaning-button-wrapper button:active::after, 
+#meaning-overlay .button-wrap:active::after {
   --angle-1: -75deg;
 }
 
-@media (hover: none) and (pointer: coarse) {
-  button::after,
-  button:hover::after,
-  button:active::after {
-    --angle-1: -75deg;
-  }
+/* ========== MEANING BUTTON SPECIFIC STYLES ========== */
+#meaning-button-wrapper.button-wrap {
+  position: relative;
+  z-index: 2;
+  border-radius: 999vw;
+  background: transparent;
+  pointer-events: none;
+  transition: all var(--anim--hover-time) var(--anim--hover-ease);
 }
 
-/* Shadow Hover */
-.button-wrap:has(button:hover) .button-shadow {
+#meaning-button-wrapper .button-shadow {
+  --shadow-cuttoff-fix: 2em;
+  position: absolute;
+  width: calc(100% + var(--shadow-cuttoff-fix));
+  height: calc(100% + var(--shadow-cuttoff-fix));
+  top: calc(0% - var(--shadow-cuttoff-fix) / 2);
+  left: calc(0% - var(--shadow-cuttoff-fix) / 2);
+  filter: blur(clamp(2px, 0.125em, 12px));
+  -webkit-filter: blur(clamp(2px, 0.125em, 12px));
+  -moz-filter: blur(clamp(2px, 0.125em, 12px));
+  -ms-filter: blur(clamp(2px, 0.125em, 12px));
+  overflow: visible;
+  pointer-events: none;
+}
+
+#meaning-button-wrapper .button-shadow::after {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  border-radius: 999vw;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.1));
+  width: calc(100% - var(--shadow-cuttoff-fix) - 0.25em);
+  height: calc(100% - var(--shadow-cuttoff-fix) - 0.25em);
+  top: calc(var(--shadow-cuttoff-fix) - 0.5em);
+  left: calc(var(--shadow-cuttoff-fix) - 0.875em);
+  padding: 0.125em;
+  box-sizing: border-box;
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  transition: all var(--anim--hover-time) var(--anim--hover-ease);
+  overflow: visible;
+  opacity: 1;
+}
+
+#meaning-button-wrapper.button-wrap:has(button:hover) .button-shadow {
   filter: blur(clamp(2px, 0.0625em, 6px));
   -webkit-filter: blur(clamp(2px, 0.0625em, 6px));
   -moz-filter: blur(clamp(2px, 0.0625em, 6px));
@@ -237,17 +216,16 @@ button:active::after {
   transition: filter var(--anim--hover-time) var(--anim--hover-ease);
 }
 
-.button-wrap:has(button:hover) .button-shadow::after {
+#meaning-button-wrapper.button-wrap:has(button:hover) .button-shadow::after {
   top: calc(var(--shadow-cuttoff-fix) - 0.875em);
   opacity: 1;
 }
 
-/* Rotation */
-.button-wrap:has(button:active) {
+#meaning-button-wrapper.button-wrap:has(button:active) {
   transform: rotate3d(1, 0, 0, 25deg);
 }
 
-.button-wrap:has(button:active) button {
+#meaning-button-wrapper.button-wrap:has(button:active) button {
   box-shadow: inset 0 0.125em 0.125em rgba(0, 0, 0, 0.05),
     inset 0 -0.125em 0.125em rgba(255, 255, 255, 0.5),
     0 0.125em 0.125em -0.125em rgba(0, 0, 0, 0.2),
@@ -257,23 +235,27 @@ button:active::after {
     inset 0 0.25em 0.05em 0 rgba(0, 0, 0, 0.15);
 }
 
-.button-wrap:has(button:active) .button-shadow {
+#meaning-button-wrapper.button-wrap:has(button:active) .button-shadow {
   filter: blur(clamp(2px, 0.125em, 12px));
   -webkit-filter: blur(clamp(2px, 0.125em, 12px));
   -moz-filter: blur(clamp(2px, 0.125em, 12px));
   -ms-filter: blur(clamp(2px, 0.125em, 12px));
 }
 
-.button-wrap:has(button:active) .button-shadow::after {
+#meaning-button-wrapper.button-wrap:has(button:active) .button-shadow::after {
   top: calc(var(--shadow-cuttoff-fix) - 0.5em);
   opacity: 0.75;
 }
 
-.button-wrap:has(button:active) span {
+#meaning-button-wrapper.button-wrap:has(button:active) span {
   text-shadow: 0.025em 0.25em 0.05em rgba(0, 0, 0, 0.12);
 }
 
-/* Styles for popup and overlay */
+/* ========== OVERLAY & POPUP STYLES ========== */
+* {
+  font-family: 'Lexend', sans-serif !important;
+}
+
 #meaning-overlay {
   max-width: 400px;
   min-width: 300px;
@@ -283,98 +265,25 @@ button:active::after {
   color: #333;
 }
 
-.meaning-box-header {
+#meaning-overlay .meaning-box-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 15px;
 }
 
-.meaning-box-header h1 {
-  font-size: 20px;
+#meaning-overlay .meaning-box-header h1 {
+  font-size: 24px;
   font-weight: 600;
   margin: 0;
   flex-grow: 1;
-  padding-right: 15px; /* Space between title and button */
+  padding-right: 15px;
 }
 
-#meaning {
+#meaning-overlay #meaning {
   font-size: 1em;
   line-height: 1.6;
   margin-top: 10px;
-}
-
-* {
-  font-family: 'Lexend', sans-serif !important;
-}
-
-/* Options Page Layout */
-.options-page-body {
-  width: 100vw; 
-  height: 100vh; 
-  display: flex; 
-  justify-content: center; 
-  align-items: center; 
-  margin: 0;
-  overflow: hidden; /* Hide scrollbars */
-}
-
-.options-container {
-  position: relative; /* For stacking context */
-  width: 450px;
-  padding: 40px;
-  text-align: center;
-  color: #333; /* Change text color back to black */
-}
-
-.options-container h1 {
-  margin-bottom: 20px;
-}
-
-.options-container label {
-  display: block;
-  margin-bottom: 15px;
-  font-weight: 500;
-}
-
-.options-container input[type="text"] {
-  width: 100%;
-  padding: 12px;
-  margin-top: 5px;
-  border: 1px solid rgba(255, 255, 255, 0.4);
-  border-radius: 5px;
-  box-sizing: border-box;
-  background-color: rgba(255, 255, 255, 0.2);
-  color: #000000; /* Change input text color back to black */
-  box-shadow: 0 4px 4px -2.5px rgba(0, 0, 0, 0.2);
-}
-
-.options-container input[type="text"]::placeholder {
-  color: #888;
-}
-
-.options-container .button-wrap {
-  margin-top: 25px;
-  display: inline-block; /* Center the button */
-}
-
-#save-button-wrapper {
-  transform: scale(1.2);
-}
-
-#status {
-  margin-top: 20px;
-  font-weight: 500;
-  color: #1a73e8;
-}
-
-#gradient-canvas {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -1; /* Place it behind all content */
 }
 
 .glass-card {
@@ -405,6 +314,7 @@ button:active::after {
     rgba(255, 255, 255, 0.8),
     transparent
   );
+  z-index: 1;
 }
 
 .glass-card::after {
@@ -422,43 +332,46 @@ button:active::after {
   );
 }
 
-.meaning-box-controls {
+#meaning-overlay .meaning-box-controls {
     display: flex;
     align-items: center;
-    gap: 10px;
+    justify-content: flex-end;
+    gap: 15px;
 }
 
-.white-background {
+#meaning-overlay.white-background {
     background: rgba(255, 255, 255, 0.95) !important;
     backdrop-filter: none !important;
     -webkit-backdrop-filter: none !important;
     color: #333 !important;
 }
 
-.white-background h1, .white-background #meaning {
-    color: #333 !important;
-}
 
-/* From Uiverse.io by Nawsome */ 
-label, .bubble {
+
+/* ========== BUBBLE TOGGLE STYLES ========== */
+#meaning-overlay label, 
+#meaning-overlay .bubble {
   display: block;
   -webkit-tap-highlight-color: transparent;
 }
 
-label {
+#meaning-overlay label {
   animation: float74 4s ease-in-out infinite;
   transform: scale(0.8);
 }
 
-.bubble, .bubble:before, .bubble:after {
+#meaning-overlay .bubble,
+#meaning-overlay .bubble:before, 
+#meaning-overlay .bubble:after {
   transition-duration: 0.2s;
 }
 
-.bubble, .bubble:after {
+#meaning-overlay .bubble, 
+#meaning-overlay .bubble:after {
   border-radius: 50%;
 }
 
-.bubble {
+#meaning-overlay .bubble {
   background-image: radial-gradient(8% 8% at 22% 28%,hsl(0,0%,100%) 45%,hsla(0,0%,100%,0) 50%),
 		radial-gradient(8% 8% at 23% 27%,hsl(0,0%,100%) 45%,hsla(0,0%,100%,0) 50%),
 		radial-gradient(8% 8% at 24% 26%,hsl(0,0%,100%) 45%,hsla(0,0%,100%,0) 50%),
@@ -467,11 +380,11 @@ label {
 		radial-gradient(8% 8% at 27% 23%,hsl(0,0%,100%) 45%,hsla(0,0%,100%,0) 50%),
 		radial-gradient(8% 8% at 28% 22%,hsl(0,0%,100%) 45%,hsla(0,0%,100%,0) 50%);
   box-shadow: 0 -0.06em 0.1em hsl(0,90%,100%) inset,
-		0 -0.15em 0.4em hsl(0,90%,45%) inset,
-		0 0.05em 0.05em hsl(0,90%,45%) inset,
+		0 -0.15em 0.4em hsl(0, 0%, 0%) inset,
+		0 0.05em 0.05em hsl(0, 0%, 0%) inset,
 		0.05em 0 0.1em hsl(0,90%,100%) inset,
 		-0.05em 0 0.1em hsl(0,90%,100%) inset,
-		0 0.1em 0.4em hsl(0,90%,60%) inset;
+		0 0.1em 0.4em hsl(0, 0%, 0%) inset;
   cursor: pointer;
   position: relative;
   width: 3em;
@@ -485,14 +398,15 @@ label {
   z-index: 0;
 }
 
-.bubble:before, .bubble:after {
+#meaning-overlay .bubble:before, 
+#meaning-overlay .bubble:after {
   content: "";
   display: block;
   position: absolute;
   transition-timing-function: var(--bubbleTiming);
 }
 
-.bubble:before {
+#meaning-overlay .bubble:before {
   border-radius: 0.75em;
   box-shadow: 0 0 0 0.5em hsl(0,0%,100%) inset;
   filter: drop-shadow(0.6em 0.6em 4px hsla(0,0%,0%,0.2));
@@ -504,7 +418,7 @@ label {
   z-index: -1;
 }
 
-.bubble:after {
+#meaning-overlay .bubble:after {
   background: radial-gradient(100% 100% at center,hsla(0,0%,0%,0) 35%,hsla(0,0%,0%,0.2) 48%,hsla(0,0%,0%,0) 50%);
   filter: blur(4px);
   top: 0.6em;
@@ -515,25 +429,29 @@ label {
   z-index: -2;
 }
 
-.bubble:focus, .bubble:hover {
+#meaning-overlay .bubble:focus, 
+#meaning-overlay .bubble:hover {
   transform: scale(1.1);
   outline: none;
 }
 
-.bubble:focus:active, .bubble:hover:active {
+#meaning-overlay .bubble:focus:active, 
+#meaning-overlay .bubble:hover:active {
   width: 3.6em;
   height: 2.4em;
 }
 
-.bubble:focus:before, .bubble:hover:before {
+#meaning-overlay .bubble:focus:before, 
+#meaning-overlay .bubble:hover:before {
   filter: drop-shadow(0.75em 0.75em 4px hsla(0,0%,0%,0.2));
 }
 
-.bubble:focus:after, .bubble:hover:after {
+#meaning-overlay .bubble:focus:after, 
+#meaning-overlay .bubble:hover:after {
   transform: translate3d(0.15em,0.15em,-1px);
 }
 
-.bubble:checked {
+#meaning-overlay .bubble:checked {
   box-shadow: 0 -0.06em 0.1em hsl(120,90%,100%) inset,
 		0 -0.15em 0.4em hsl(120,90%,45%) inset,
 		0 0.05em 0.05em hsl(120,90%,45%) inset,
@@ -542,38 +460,44 @@ label {
 		0 0.1em 0.4em hsl(120,90%,60%) inset;
 }
 
-.bubble:checked:before {
+#meaning-overlay .bubble:checked:before {
   border-radius: 0.25em;
   width: 0.5em;
 }
-/* Reduced motion */
+
 @media (prefers-reduced-motion: reduce) {
-  label {
+  #meaning-overlay label {
     animation: none;
   }
 
-  .bubble, .bubble:before, .bubble:after {
+  #meaning-overlay .bubble, 
+  #meaning-overlay .bubble:before, 
+  #meaning-overlay .bubble:after {
     transition-duration: 0s;
   }
 
-  .bubble:focus, .bubble:hover {
+  #meaning-overlay .bubble:focus, 
+  #meaning-overlay .bubble:hover {
     transform: scale(1);
   }
 
-  .bubble:focus:active, .bubble:hover:active {
+  #meaning-overlay .bubble:focus:active, 
+  #meaning-overlay .bubble:hover:active {
     width: 3em;
     height: 3em;
   }
 
-  .bubble:focus:before, .bubble:hover:before {
+  #meaning-overlay .bubble:focus:before, 
+  #meaning-overlay .bubble:hover:before {
     filter: drop-shadow(0.6em 0.6em 4px hsla(0,0%,0%,0.2));
   }
 
-  .bubble:focus:after, .bubble:hover:after {
+  #meaning-overlay .bubble:focus:after, 
+  #meaning-overlay .bubble:hover:after {
     transform: translate3d(0,0,-1px);
   }
 }
-/* Animations */
+
 @keyframes float74 {
   from, to {
     transform: translate(0,3%) scale(0.8);
@@ -590,4 +514,73 @@ label {
   75% {
     transform: translate(3%,0) scale(0.8);
   }
+}
+
+/* ========== OPTIONS PAGE STYLES ========== */
+.options-page-body {
+  width: 100vw; 
+  height: 100vh; 
+  display: flex; 
+  justify-content: center; 
+  align-items: center; 
+  margin: 0;
+  overflow: hidden;
+}
+
+.options-container {
+  position: relative;
+  width: 450px;
+  padding: 40px;
+  text-align: center;
+  color: #333;
+}
+
+.options-container h1 {
+  margin-bottom: 20px;
+}
+
+.options-container label {
+  display: block;
+  margin-bottom: 15px;
+  font-weight: 500;
+}
+
+.options-container input[type="text"] {
+  width: 100%;
+  padding: 12px;
+  margin-top: 5px;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 5px;
+  box-sizing: border-box;
+  background-color: rgba(255, 255, 255, 0.2);
+  color: #000000;
+  box-shadow: 0 4px 4px -2.5px rgba(0, 0, 0, 0.2);
+}
+
+.options-container input[type="text"]::placeholder {
+  color: #888;
+}
+
+.options-container .button-wrap {
+  margin-top: 25px;
+  display: inline-block;
+}
+
+#save-button-wrapper {
+  transform: scale(1.2);
+}
+
+#status {
+  margin-top: 20px;
+  font-weight: 500;
+  color: #1a73e8;
+}
+
+#gradient-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
 }
