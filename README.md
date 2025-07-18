@@ -1,4 +1,4 @@
-# Meaning Finder
+# Meaning Finder Extension for Chromium based browsers
 
 Meaning Finder is a browser extension that helps you find the meaning of words or paragraph instantly. Simply select a word or paragraph on any webpage, and the definition will appear in a clean and simple popup.
 
